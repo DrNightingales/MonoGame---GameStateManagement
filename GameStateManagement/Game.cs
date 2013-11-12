@@ -15,10 +15,10 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameStateManagement
 {
     /// <summary>
-    /// Sample showing how to manage different game states, with transitions
-    /// between menu screens, a loading screen, the game itself, and a pause
-    /// menu. This main game class is extremely simple: all the interesting
-    /// stuff happens in the ScreenManager component.
+    /// Это пример, который показывает как управлять состояниями игры
+    /// и переключаться между экранами игры, такими как: меню загрузки, самой игра,
+    /// меню паузы и.т.д. Основной класс крайне прост, всё самое интересное происходит в
+    /// ScreenManager component.
     /// </summary>
     public class GameStateManagementGame : Game
     {
@@ -43,7 +43,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// The main game constructor.
+        /// Основной конструктор игры
         /// </summary>
         public GameStateManagementGame()
         {
@@ -54,12 +54,12 @@ namespace GameStateManagement
             graphics.PreferredBackBufferWidth = BufferWidth;
             graphics.PreferredBackBufferHeight = BufferHeight;
 
-            // Create the screen manager component.
+            // Создаётся screen manager component.
             screenManager = new ScreenManager(this);
 
             Components.Add(screenManager);
 
-            // Activate the first screens.
+            // Активируются начальные экраны.
             screenManager.AddScreen(new BackgroundScreen(), null);
             screenManager.AddScreen(new MainMenuScreen(), null);
         }
@@ -71,13 +71,13 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// This is called when the game should draw itself.
+        /// Вызывается, когда игре необходимо прорисовать саму себя
         /// </summary>
         protected override void Draw(GameTime gameTime)
         {
             graphics.GraphicsDevice.Clear(Color.Black);
 
-            // The real drawing happens inside the screen manager component.
+            // Настоящая прорисовка происходит внутри screen manager
             base.Draw(gameTime);
         }
 
