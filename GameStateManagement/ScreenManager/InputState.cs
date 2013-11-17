@@ -108,7 +108,7 @@ namespace GameStateManagement
         {
             if (controllingPlayer.HasValue)
             {
-                // Read input from the specified player.
+                // Считывает ввод с определённого игрока.
                 playerIndex = controllingPlayer.Value;
 
                 int i = (int)playerIndex;
@@ -118,7 +118,7 @@ namespace GameStateManagement
             }
             else
             {
-                // Accept input from any player.
+                // Принимает ввод с любого игрока.
                 return (IsNewKeyPress(key, PlayerIndex.One, out playerIndex) ||
                         IsNewKeyPress(key, PlayerIndex.Two, out playerIndex) ||
                         IsNewKeyPress(key, PlayerIndex.Three, out playerIndex) ||
@@ -128,17 +128,18 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Helper for checking if a button was newly pressed during this update.
-        /// The controllingPlayer parameter specifies which player to read input for.
-        /// If this is null, it will accept input from any player. When a button press
-        /// is detected, the output playerIndex reports which player pressed it.
+        /// Помощник для поверки нажатия клавиши, при этом обновлении. Праметр
+        /// управления Игроком(controllingPlayer), указывает: состояние какого игрока считывать.
+        /// При значении этого пареметра null данные принимаютя от любого игрока. Когда замечено
+        /// нажатие клавиши, выводящая конструкция playerIndex возвращает значение игрока, нажавшего на клавишу.
+        ///Примечание 2: Для мультиплеера
         /// </summary>
         public bool IsNewButtonPress(Buttons button, PlayerIndex? controllingPlayer,
                                                      out PlayerIndex playerIndex)
         {
             if (controllingPlayer.HasValue)
             {
-                // Read input from the specified player.
+                // Считывает ввод с определённого игрока.
                 playerIndex = controllingPlayer.Value;
 
                 int i = (int)playerIndex;
@@ -148,7 +149,7 @@ namespace GameStateManagement
             }
             else
             {
-                // Accept input from any player.
+                // Принимает ввод с любого игрока.
                 return (IsNewButtonPress(button, PlayerIndex.One, out playerIndex) ||
                         IsNewButtonPress(button, PlayerIndex.Two, out playerIndex) ||
                         IsNewButtonPress(button, PlayerIndex.Three, out playerIndex) ||
@@ -158,10 +159,10 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Checks for a "menu select" input action.
-        /// The controllingPlayer parameter specifies which player to read input for.
-        /// If this is null, it will accept input from any player. When the action
-        /// is detected, the output playerIndex reports which player pressed it.
+        /// Проверят введение события "выбор меню".Праметр
+        /// управления Игроком(controllingPlayer), указывает: состояние какого игрока считывать
+        /// При значении этого пареметра null данные принимаютя от любого игрока. Когда замечено
+        /// нажатие клавиши, выводящая конструкция playerIndex возвращает значение игрока, нажавшего на клавишу..
         /// </summary>
         public bool IsMenuSelect(PlayerIndex? controllingPlayer,
                                  out PlayerIndex playerIndex)
@@ -174,10 +175,10 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Checks for a "menu cancel" input action.
-        /// The controllingPlayer parameter specifies which player to read input for.
-        /// If this is null, it will accept input from any player. When the action
-        /// is detected, the output playerIndex reports which player pressed it.
+        /// Проверят введение события "закрытие меню".Праметр
+        /// управления Игроком(controllingPlayer), указывает: состояние какого игрока считывать
+        /// При значении этого пареметра null данные принимаютя от любого игрока. Когда замечено
+        /// нажатие клавиши, выводящая конструкция playerIndex возвращает значение игрока, нажавшего на клавишу..
         /// </summary>
         public bool IsMenuCancel(PlayerIndex? controllingPlayer,
                                  out PlayerIndex playerIndex)
@@ -189,9 +190,9 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Checks for a "menu up" input action.
-        /// The controllingPlayer parameter specifies which player to read
-        /// input for. If this is null, it will accept input from any player.
+        /// Проверят введение события "меню вверх".Праметр
+        /// управления Игроком(controllingPlayer), указывает: состояние какого игрока считывать
+        /// При значении этого пареметра null данные принимаютя от любого игрока.
         /// </summary>
         public bool IsMenuUp(PlayerIndex? controllingPlayer)
         {
@@ -204,9 +205,9 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Checks for a "menu down" input action.
-        /// The controllingPlayer parameter specifies which player to read
-        /// input for. If this is null, it will accept input from any player.
+        /// Проверят введение события "меню вниз".Праметр
+        /// управления Игроком(controllingPlayer), указывает: состояние какого игрока считывать
+        /// При значении этого пареметра null данные принимаютя от любого игрока.
         /// </summary>
         public bool IsMenuDown(PlayerIndex? controllingPlayer)
         {
@@ -219,9 +220,9 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Checks for a "pause the game" input action.
-        /// The controllingPlayer parameter specifies which player to read
-        /// input for. If this is null, it will accept input from any player.
+        /// Проверят введение события "пауза меню меню".Праметр
+        /// управления Игроком(controllingPlayer), указывает: состояние какого игрока считывать
+        /// При значении этого пареметра null данные принимаютя от любого игрока.
         /// </summary>
         public bool IsPauseGame(PlayerIndex? controllingPlayer)
         {
