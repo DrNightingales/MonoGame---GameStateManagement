@@ -17,10 +17,10 @@ using System.Collections.Generic;
 namespace GameStateManagement
 {
     /// <summary>
-    /// Helper for reading input from keyboard, gamepad, and touch input. This class 
-    /// tracks both the current and previous state of the input devices, and implements 
-    /// query methods for high level input actions such as "move up through the menu"
-    /// or "pause the game".
+    /// Вспомогательный класс для чтения состояния с геймпада или тачскрина, 
+    /// записыввающий предыдущее и настоящее состояние обоих устройств, а так же осуществляет и
+    /// запрашивает методы для высокоуровневых действий, таких как "переместиться вверх по меню"
+    /// или "поставить игру на паузу".
     /// </summary>
     public class InputState
     {
@@ -46,7 +46,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Constructs a new input state.
+        /// Конструкция ново-введённого значения
         /// </summary>
         public InputState()
         {
@@ -56,7 +56,7 @@ namespace GameStateManagement
             LastKeyboardStates = new KeyboardState[MaxInputs];
             LastGamePadStates = new GamePadState[MaxInputs];
 
-            GamePadWasConnected = new bool[MaxInputs];
+            GamePadWasConnected = new bool[MaxInputs];//Проверка: есть ли геймпад
         }
 
 
@@ -66,7 +66,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Reads the latest state of the keyboard and gamepad.
+        /// Считывает последнее состояние клавиатуры и  геймпада
         /// </summary>
         public void Update()
         {
@@ -78,15 +78,15 @@ namespace GameStateManagement
                 CurrentKeyboardStates[i] = Keyboard.GetState((PlayerIndex)i);
                 CurrentGamePadStates[i] = GamePad.GetState((PlayerIndex)i);
 
-                // Keep track of whether a gamepad has ever been
-                // connected, so we can detect if it is unplugged.
+                // Проверяет, был ли геймпад присоединён
+                // или мы можем утверждать, что его нет
                 if (CurrentGamePadStates[i].IsConnected)
                 {
                     GamePadWasConnected[i] = true;
                 }
             }
 
-            TouchState = TouchPanel.GetState();
+            TouchState = TouchPanel.GetState(); //Примечание 1: Работа с тачпадом
 
             Gestures.Clear();
             while (TouchPanel.IsGestureAvailable)
@@ -97,10 +97,11 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Helper for checking if a key was newly pressed during this update. The
-        /// controllingPlayer parameter specifies which player to read input for.
-        /// If this is null, it will accept input from any player. When a keypress
-        /// is detected, the output playerIndex reports which player pressed it.
+        /// Помощник для поверки нажатия клавиши, при этом обновлении. Праметр
+		/// управления Игроком(controllingPlayer), указывает: состояние какого игрока считывать.
+        /// При значении этого пареметра null данные принимаютя от любого игрока. Когда замечено
+        /// нажатие клавиши, выводящая конструкция playerIndex возвращает значение игрока, нажавшего на клавишу.
+		///Примечание 2: Для мультиплеера
         /// </summary>
         public bool IsNewKeyPress(Keys key, PlayerIndex? controllingPlayer,
                                             out PlayerIndex playerIndex)
