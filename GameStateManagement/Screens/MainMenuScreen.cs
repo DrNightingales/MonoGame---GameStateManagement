@@ -14,30 +14,30 @@ using Microsoft.Xna.Framework;
 namespace GameStateManagement
 {
     /// <summary>
-    /// The main menu screen is the first thing displayed when the game starts up.
+    /// Экран главного меню - первая вещь отображаемая, когда игра запускается.
     /// </summary>
     class MainMenuScreen : MenuScreen
     {
         #region Initialization
 
 
-        /// <summary>
-        /// Constructor fills in the menu contents.
+        /// <summary> 
+        ///  Конструктор заполняет контент меню.
         /// </summary>
         public MainMenuScreen()
             : base("Main Menu")
         {
-            // Create our menu entries.
+            // Создает компоненты нашего меню.
             MenuEntry playGameMenuEntry = new MenuEntry("Play Game");
             MenuEntry optionsMenuEntry = new MenuEntry("Options");
             MenuEntry exitMenuEntry = new MenuEntry("Exit");
 
-            // Hook up menu event handlers.
+            // Подключаем обработчики событий меню.
             playGameMenuEntry.Selected += PlayGameMenuEntrySelected;
             optionsMenuEntry.Selected += OptionsMenuEntrySelected;
             exitMenuEntry.Selected += OnCancel;
 
-            // Add entries to the menu.
+            // Добавляет компоненты в меню.
             MenuEntries.Add(playGameMenuEntry);
             MenuEntries.Add(optionsMenuEntry);
             MenuEntries.Add(exitMenuEntry);
@@ -50,7 +50,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Event handler for when the Play Game menu entry is selected.
+        /// Событие обработчика, если выбран компонент меню Играть.
         /// </summary>
         void PlayGameMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
@@ -60,7 +60,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Event handler for when the Options menu entry is selected.
+        /// Событие обработчика, если выбран компонент меню Опции.
         /// </summary>
         void OptionsMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
@@ -69,11 +69,11 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// When the user cancels the main menu, ask if they want to exit the sample.
+        /// Когда пользователь закрывает главное меню, спрашивает, хочет ли он выйти из приложения.
         /// </summary>
         protected override void OnCancel(PlayerIndex playerIndex)
         {
-            const string message = "Are you sure you want to exit this sample?";
+            const string message = "Вы точно хотите выйти из приложение?";
 
             MessageBoxScreen confirmExitMessageBox = new MessageBoxScreen(message);
 
@@ -84,8 +84,8 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Event handler for when the user selects ok on the "are you sure
-        /// you want to exit" message box.
+        /// Событие обработчика, когда пользователь выбирает ОК в сообщении"Вы точно 
+        /// хотите выйти из приложение?".
         /// </summary>
         void ConfirmExitMessageBoxAccepted(object sender, PlayerIndexEventArgs e)
         {
