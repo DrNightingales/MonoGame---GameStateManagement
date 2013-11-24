@@ -34,7 +34,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Constructor.
+        ///  онструктор
         /// </summary>
         public BackgroundScreen()
         {
@@ -44,11 +44,12 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Loads graphics content for this screen. The background texture is quite
-        /// big, so we use our own local ContentManager to load it. This allows us
-        /// to unload before going from the menus into the game itself, wheras if we
-        /// used the shared ContentManager provided by the Game class, the content
-        /// would remain loaded forever.
+        /// «агружаем графический контент дл€ этого экрана. “екстура заднего фона довольна больша€,
+        /// поэтому мы будем использовать наш локальный Content Manager дл€ загрузки его.
+        /// Ёто позвол€ет нам разгрузить его перед тем, как перемещатьс€ из меню в саму игру.
+        /// ≈сли мы используем общий ContentManager обеспеченный классом Game, контент останетс€
+        /// загружатьс€ навсегда.
+
         /// </summary>
         public override void LoadContent()
         {
@@ -60,7 +61,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Unloads graphics content for this screen.
+        ///–азгружает графический контент дл€ этого экрана.
         /// </summary>
         public override void UnloadContent()
         {
@@ -74,11 +75,9 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Updates the background screen. Unlike most screens, this should not
-        /// transition off even if it has been covered by another screen: it is
-        /// supposed to be covered, after all! This overload forces the
-        /// coveredByOtherScreen parameter to false in order to stop the base
-        /// Update method wanting to transition off.
+        /// ¬ отличие от других экранов, этот не следует
+        /// пересекать даже если на него накладываетс€ другой экран: он предположительно будет наложен после всех действий!
+        /// Ёто перезагрузка заставл€ет параметры coveredByOtherScreen отменить пор€док базового метода Update, который исчезает
         /// </summary>
         public override void Update(GameTime gameTime, bool otherScreenHasFocus,
                                                        bool coveredByOtherScreen)
@@ -88,7 +87,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Draws the background screen.
+        /// ќтрисовка экрана заднего фона.
         /// </summary>
         public override void Draw(GameTime gameTime)
         {
