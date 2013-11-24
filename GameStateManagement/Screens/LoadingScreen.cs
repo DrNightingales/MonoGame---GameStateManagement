@@ -16,18 +16,18 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameStateManagement
 {
     /// <summary>
-    /// The loading screen coordinates transitions between the menu system and the
-    /// game itself. Normally one screen will transition off at the same time as
-    /// the next screen is transitioning on, but for larger transitions that can
-    /// take a longer time to load their data, we want the menu system to be entirely
-    /// gone before we start loading the game. This is done as follows:
+    /// Экроан загрузки координирует переходы между системой меню и игрой. 
+    /// Обычно один экран исчезает, в это же время другой экран появляется, заменяя его.
+    /// Большие преходы могут занимать больше времени для загрузки данных. 
+    /// Перед тем как начнется загрузка игры все переходы должны быть завершены.
     /// 
-    /// - Tell all the existing screens to transition off.
-    /// - Activate a loading screen, which will transition on at the same time.
-    /// - The loading screen watches the state of the previous screens.
-    /// - When it sees they have finished transitioning off, it activates the real
-    ///   next screen, which may take a long time to load its data. The loading
-    ///   screen will be the only thing displayed while this load is taking place.
+    /// Это делается следующим образом:
+    /// -Дать команду всем существующим эранам исчезнуть
+    /// -Активировать экран загрузки, который будет появляться во время предидущего действия
+    /// -Экран загрузки проверяет состояние предидущих экранов
+    /// -Когда он видит, что они завершили свое исчезновение, он активирует следующий экран, которому для загрузки данных может потребоваться время.
+    /// Экран загрузки будет единственным экраном, выводящимся на дисплей, пока происходит загрузка игры.
+    /// 
     /// </summary>
     class LoadingScreen : GameScreen
     {
@@ -44,8 +44,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// The constructor is private: loading screens should
-        /// be activated via the static Load method instead.
+        /// Конструктор приватный: экран загрузки следует активировать через статичесский метод загрузки Load.
         /// </summary>
         private LoadingScreen(ScreenManager screenManager, bool loadingIsSlow,
                               GameScreen[] screensToLoad)
@@ -58,17 +57,17 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Activates the loading screen.
+        /// Активация экрана загруззки.
         /// </summary>
         public static void Load(ScreenManager screenManager, bool loadingIsSlow,
                                 PlayerIndex? controllingPlayer,
                                 params GameScreen[] screensToLoad)
         {
-            // Tell all the current screens to transition off.
+            //Даем команду текущим экранам исчезнуть.
             foreach (GameScreen screen in screenManager.GetScreens())
                 screen.ExitScreen();
 
-            // Create and activate the loading screen.
+            //Создаем и активируем экран загрузки.
             LoadingScreen loadingScreen = new LoadingScreen(screenManager,
                                                             loadingIsSlow,
                                                             screensToLoad);
@@ -83,15 +82,14 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Updates the loading screen.
+        /// Делаем update экрана загрузки.
         /// </summary>
         public override void Update(GameTime gameTime, bool otherScreenHasFocus,
                                                        bool coveredByOtherScreen)
         {
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
 
-            // If all the previous screens have finished transitioning
-            // off, it is time to actually perform the load.
+            //Если все предидущие экраны завершили свое изчезновение, пора выполнить загрузку. 
             if (otherScreensAreGone)
             {
                 ScreenManager.RemoveScreen(this);
@@ -104,36 +102,28 @@ namespace GameStateManagement
                     }
                 }
 
-                // Once the load has finished, we use ResetElapsedTime to tell
-                // the  game timing mechanism that we have just finished a very
-                // long frame, and that it should not try to catch up.
+                //После того как загрузка завершена, используем ResetElapsedTime чтобы сказать игровому механизму времени,
+                //что мы только что завершили очень длинную конструкцию и ему не следует пытаться ее прервать/догнать.
                 ScreenManager.Game.ResetElapsedTime();
             }
         }
 
 
         /// <summary>
-        /// Draws the loading screen.
+        /// Рисуем экран загрузки.
         /// </summary>
         public override void Draw(GameTime gameTime)
         {
-            // If we are the only active screen, that means all the previous screens
-            // must have finished transitioning off. We check for this in the Draw
-            // method, rather than in Update, because it isn't enough just for the
-            // screens to be gone: in order for the transition to look good we must
-            // have actually drawn a frame without them before we perform the load.
+            //Проверяем завершились ли предидущие экраны. Это очень важно для того, чтобы все выглядело хорошо. 
+            //Нам нужно обращяться к конструкции без них, прежде чем мы выполним загрузку.
             if ((ScreenState == ScreenState.Active) &&
                 (ScreenManager.GetScreens().Length == 1))
             {
                 otherScreensAreGone = true;
             }
 
-            // The gameplay screen takes a while to load, so we display a loading
-            // message while that is going on, but the menus load very quickly, and
-            // it would look silly if we flashed this up for just a fraction of a
-            // second while returning from the game to the menus. This parameter
-            // tells us how long the loading is going to take, so we know whether
-            // to bother drawing the message.
+            //Экрану загрузки требуется время для выполнения, так что мы отобразим загрузку.
+            //этот параметр говорит нам сколько времени займет загрузка.
             if (loadingIsSlow)
             {
                 SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
@@ -141,7 +131,7 @@ namespace GameStateManagement
 
                 const string message = "Loading...";
 
-                // Center the text in the viewport.
+                //Выравниваем текст в окне отображения.
                 Viewport viewport = ScreenManager.GraphicsDevice.Viewport;
                 Vector2 viewportSize = new Vector2(viewport.Width, viewport.Height);
                 Vector2 textSize = font.MeasureString(message);
@@ -149,7 +139,7 @@ namespace GameStateManagement
 
                 Color color = Color.White * TransitionAlpha;
 
-                // Draw the text.
+                //Рисуем текст.
                 spriteBatch.Begin();
                 spriteBatch.DrawString(font, message, textPosition, color);
                 spriteBatch.End();
