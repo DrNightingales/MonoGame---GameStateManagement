@@ -8,6 +8,10 @@ namespace WindowsGame
 {
     internal class TestScreen : Screen
     {
+        /// <summary>
+        /// Управляет экраном игры
+        /// Содержит методы Remove, Update, Draw, конструтор и переменную Initialize
+        /// </summary>
         SpriteFont font;
         List<MenuItem> menuItems = new List<MenuItem>();
         Color itemNormalColor = Color.White;
@@ -32,20 +36,20 @@ namespace WindowsGame
               0.1f, 10f);
         }
 
-        internal override bool Initialize()
+        internal override bool Initialize() //загружает шрифты и модели, создает элементы меню
         {
             font = Commons.Content.Load<SpriteFont>("Font1");
             sphere = Commons.Content.Load<Model>("27");
 
             menuItems.AddRange(new MenuItem[]
       {
-        new MenuItem( // создание элемента меню
+        new MenuItem( 
           "Меню",
           font,
           new Vector2(
             Commons.GraphicsDevice.Viewport.Width - font.MeasureString("Меню").X,
             font.MeasureString("Меню").Y / 2),
-          new Action(() => { ScreenManager.ActivateScreenByName("MainMenuScreen"); } )), //создание события
+          new Action(() => { ScreenManager.ActivateScreenByName("MainMenuScreen"); } )), 
       });
 
             return base.Initialize();
@@ -58,7 +62,7 @@ namespace WindowsGame
 
         internal override void Update(GameTime gameTime)
         {
-            if (InputManager.IsKeyPress(Keys.Escape)) // проверка на нажатие кнопки
+            if (InputManager.IsKeyPress(Keys.Escape)) 
                 ScreenManager.ActivateScreenByName("MainMenuScreen");
 
             for (int i = 0; i < menuItems.Count; i++)
@@ -75,7 +79,7 @@ namespace WindowsGame
             base.Update(gameTime);
         }
 
-        internal override void Draw(GameTime gameTime) //отрисовка
+        internal override void Draw(GameTime gameTime)
         {
             Commons.GraphicsDevice.Clear(Color.Transparent);
 
