@@ -20,10 +20,9 @@ using Microsoft.Xna.Framework.Input.Touch;
 namespace GameStateManagement
 {
     /// <summary>
-    /// The screen manager is a component which manages one or more GameScreen
-    /// instances. It maintains a stack of screens, calls their Update and Draw
-    /// methods at the appropriate times, and automatically routes input to the
-    /// topmost active screen.
+    /// screen manager это компонент управляющий одним или несколькими GameScreen
+    /// объекты. Он поддерживает стеки экранов, вызывает Update и Draw
+    /// методы в нужные моменты, и автоматически прокручивает самую верхнюю часть активного экрана.
     /// </summary>
     public class ScreenManager : DrawableGameComponent
     {
@@ -48,8 +47,8 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// A default SpriteBatch shared by all the screens. This saves
-        /// each screen having to bother creating their own local instance.
+        /// Стандартный SpriteBatch делится между всеми экранами.
+        /// Поэтому необходимость создавать отдельный для каждого отпадает  
         /// </summary>
         public SpriteBatch SpriteBatch
         {
@@ -58,8 +57,8 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// A default font shared by all the screens. This saves
-        /// each screen having to bother loading their own local copy.
+        /// Стандартный шрифт, разделён между всеми экранами. Поэтому
+        /// отпадает необходимость беспокоить его локальную копию.
         /// </summary>
         public SpriteFont Font
         {
@@ -68,9 +67,9 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// If true, the manager prints out a list of all the screens
-        /// each time it is updated. This can be useful for making sure
-        /// everything is being added and removed at the right times.
+        /// Если правда, каждый раз при обновлении печатает список экранов
+        /// Это может быть полезно, чтобы проверить
+        /// было ли всё добавлено и удалено в нужное время.
         /// </summary>
         public bool TraceEnabled
         {
@@ -85,7 +84,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Constructs a new screen manager component.
+        /// Создает  новый screen manager.
         /// </summary>
         public ScreenManager(Game game)
             : base(game)
