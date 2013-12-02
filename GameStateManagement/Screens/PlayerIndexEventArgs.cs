@@ -15,13 +15,13 @@ using Microsoft.Xna.Framework;
 namespace GameStateManagement
 {
     /// <summary>
-    /// Custom event argument which includes the index of the player who
-    /// triggered the event. This is used by the MenuEntry.Selected event.
+    /// ѕользовательский аргумент событи€, которое включает в себ€ индекс игрока, инициировавшего событие. 
+    /// Ёто используетс€ в случае MenuEntry.Selected
     /// </summary>
     class PlayerIndexEventArgs : EventArgs
     {
         /// <summary>
-        /// Constructor.
+        ///  онструктор
         /// </summary>
         public PlayerIndexEventArgs(PlayerIndex playerIndex)
         {
@@ -30,7 +30,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Gets the index of the player who triggered this event.
+        /// ѕолучаем индекс игрока, инициировавшего событие.
         /// </summary>
         public PlayerIndex PlayerIndex
         {
