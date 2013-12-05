@@ -17,7 +17,7 @@ using System.IO;
 namespace GameStateManagement
 {
     /// <summary>
-    /// Enum describes the screen transition state.
+    /// Перечисление описывает состояние перемещения экрана
     /// </summary>
     public enum ScreenState
     {
@@ -29,11 +29,11 @@ namespace GameStateManagement
 
 
     /// <summary>
-    /// A screen is a single layer that has update and draw logic, and which
-    /// can be combined with other layers to build up a complex menu system.
-    /// For instance the main menu, the options menu, the "are you sure you
-    /// want to quit" message box, and the main game itself are all implemented
-    /// as screens.
+    /// Экран это одиночный слой, который обладает логикой обновления и рисования, и который
+    /// можно сочетать с другими экранами для создания комплекса меню.
+    /// Например главное меню, настройки, сообщение "Вы уверены, 
+    /// что хотите выйти", да и сама по себе игра - это всё
+    /// экраны
     /// </summary>
     public abstract class GameScreen
     {
@@ -41,11 +41,11 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Normally when one screen is brought up over the top of another,
-        /// the first screen will transition off to make room for the new
-        /// one. This property indicates whether the screen is only a small
-        /// popup, in which case screens underneath it do not need to bother
-        /// transitioning off.
+        /// Обычно, когда один экран переносят поверх другого,
+        /// первый экран скрывается, чтобы дать место новому.
+        /// Это свойство показывает возник ли экран,
+        /// в таком случае экраны под ним не нуждаются
+        /// в исчезновении
         /// </summary>
         public bool IsPopup
         {
@@ -57,8 +57,8 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Indicates how long the screen takes to
-        /// transition on when it is activated.
+        /// Показывает, как долго экран 
+        /// разварачивается при активации
         /// </summary>
         public TimeSpan TransitionOnTime
         {
