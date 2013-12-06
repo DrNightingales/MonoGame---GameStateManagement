@@ -70,8 +70,8 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Indicates how long the screen takes to
-        /// transition off when it is deactivated.
+        /// Показывает, как долго экран 
+        /// сварачивается при дезактивации
         /// </summary>
         public TimeSpan TransitionOffTime
         {
@@ -83,9 +83,9 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Gets the current position of the screen transition, ranging
-        /// from zero (fully active, no transition) to one (transitioned
-        /// fully off to nothing).
+        /// Получает текущую позицию перемещения, растяжения
+        /// от нуля (полностью активен, нет перемещения) до 1 (перемещено
+        /// целиком из ничего).
         /// </summary>
         public float TransitionPosition
         {
@@ -108,7 +108,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Gets the current screen transition state.
+        /// Получает текущее состояние перемещения
         /// </summary>
         public ScreenState ScreenState
         {
@@ -120,12 +120,11 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// There are two possible reasons why a screen might be transitioning
-        /// off. It could be temporarily going away to make room for another
-        /// screen that is on top of it, or it could be going away for good.
-        /// This property indicates whether the screen is exiting for real:
-        /// if set, the screen will automatically remove itself as soon as the
-        /// transition finishes.
+        /// Есть 2 возможные причины, почему экран должен быть свёрнут
+        /// Он должен уйти, чтобы дать место новому экрану, который
+        /// находится поверх него, или он может уходить за good.
+        /// Это свойство показывает закрывается ли экран из-за рельной причины.
+        /// Если установлено, то экран удалит себя, как только перемещение будет завершено.
         /// </summary>
         public bool IsExiting
         {
@@ -137,7 +136,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Checks whether this screen is active and can respond to user input.
+        /// Проверяет: активен ли экран и может ли он отвечать на ввод пользователя
         /// </summary>
         public bool IsActive
         {
@@ -153,7 +152,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Gets the manager that this screen belongs to.
+        /// Получает manager которому принадлежит экран
         /// </summary>
         public ScreenManager ScreenManager
         {
