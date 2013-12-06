@@ -164,12 +164,12 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Gets the index of the player who is currently controlling this screen,
-        /// or null if it is accepting input from any player. This is used to lock
-        /// the game to a specific player profile. The main menu responds to input
-        /// from any connected gamepad, but whichever player makes a selection from
-        /// this menu is given control over all subsequent screens, so other gamepads
-        /// are inactive until the controlling player returns to the main menu.
+        /// Получает индекс игрока, управляещего экраном или null, если принимает
+        /// ввод от любого игрока.Это используется, чтобы заблокировать от 
+        /// определённого игрока. Главное меню отвечает на ввод с любого
+        /// подключённого геймпала, но какой бы игрок не выбрал форму
+        /// это меню получает контроль над всеми экранами,так что другие геймпады
+        /// остаются неактивными до тех пор, пока игрок не передаст контроль обратно.
         /// </summary>
         public PlayerIndex? ControllingPlayer
         {
@@ -181,7 +181,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Gets the gestures the screen is interested in. Screens should be as specific
+        /// Получает поведение нужного экрана. Screens should be as specific
         /// as possible with gestures to increase the accuracy of the gesture engine.
         /// For example, most menus only need Tap or perhaps Tap and VerticalDrag to operate.
         /// These gestures are handled by the ScreenManager when screens change and
