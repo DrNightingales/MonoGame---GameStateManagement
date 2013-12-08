@@ -10,13 +10,18 @@ namespace WindowsGame
 {
     internal class MenuItem
     {
+        /// <summary>
+        /// Управляет элементами меню (кнопки)
+        /// Содержит конструктор, bool Hovered и Clicked
+        /// 
+        /// </summary>
         internal string Text { get; private set; }
         internal SpriteFont Font { get; private set; }
         internal Vector2 Position { get; private set; }
         internal Rectangle Rect { get; private set; }
         internal Action Action { get; private set; }
 
-        internal MenuItem(string text, SpriteFont font, Vector2 position, Action action) // элемент меню (кнопка)
+        internal MenuItem(string text, SpriteFont font, Vector2 position, Action action) //принимает на вход string, spritefont, vector2 и action
         {
             Text = text;
             Font = font;
@@ -34,12 +39,12 @@ namespace WindowsGame
 
             Action = action;
         }
-        internal bool Hovered()
+        internal bool Hovered() //Проверяет, находится ли мышь в пределах Rectangle элемента меню
         {
             return Rect.Contains(InputManager.GetMousePositionToPoint());
         }
 
-        internal bool Clicked()
+        internal bool Clicked() //Проверяет нажата ли левая кнопка мыши
         {
             return Hovered() && InputManager.IsMouseLeftClick();
         }
