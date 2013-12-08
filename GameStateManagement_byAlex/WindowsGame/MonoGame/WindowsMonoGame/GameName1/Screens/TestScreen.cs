@@ -34,8 +34,8 @@ namespace WindowsGame
 
         internal override bool Initialize()
         {
-            font = Commons.Content.Load<SpriteFont>("Font1");
-            sphere = Commons.Content.Load<Model>("27");
+            font = Commons.Content.Load<SpriteFont>("gamefont");
+            sphere = Commons.Content.Load<Model>("Ship");
 
             menuItems.AddRange(new MenuItem[]
       {

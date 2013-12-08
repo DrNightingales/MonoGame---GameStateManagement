@@ -24,7 +24,7 @@ namespace WindowsGame
 
         internal override bool Initialize()
         {
-            font = Commons.Content.Load<SpriteFont>("Font1"); //загрузка шрифта
+            font = Commons.Content.Load<SpriteFont>("menufont"); //загрузка шрифта
 
             menuItems.AddRange(new MenuItem[]
       {
