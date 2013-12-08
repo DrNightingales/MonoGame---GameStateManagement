@@ -17,7 +17,7 @@ using System.IO;
 namespace GameStateManagement
 {
     /// <summary>
-    /// Enum describes the screen transition state.
+    /// Перечисление описывает состояние перемещения экрана
     /// </summary>
     public enum ScreenState
     {
@@ -29,11 +29,11 @@ namespace GameStateManagement
 
 
     /// <summary>
-    /// A screen is a single layer that has update and draw logic, and which
-    /// can be combined with other layers to build up a complex menu system.
-    /// For instance the main menu, the options menu, the "are you sure you
-    /// want to quit" message box, and the main game itself are all implemented
-    /// as screens.
+    /// Экран это одиночный слой, который обладает логикой обновления и рисования, и который
+    /// можно сочетать с другими экранами для создания комплекса меню.
+    /// Например главное меню, настройки, сообщение "Вы уверены, 
+    /// что хотите выйти", да и сама по себе игра - это всё
+    /// экраны
     /// </summary>
     public abstract class GameScreen
     {
@@ -41,11 +41,11 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Normally when one screen is brought up over the top of another,
-        /// the first screen will transition off to make room for the new
-        /// one. This property indicates whether the screen is only a small
-        /// popup, in which case screens underneath it do not need to bother
-        /// transitioning off.
+        /// Обычно, когда один экран переносят поверх другого,
+        /// первый экран скрывается, чтобы дать место новому.
+        /// Это свойство показывает возник ли экран,
+        /// в таком случае экраны под ним не нуждаются
+        /// в исчезновении
         /// </summary>
         public bool IsPopup
         {
@@ -57,8 +57,8 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Indicates how long the screen takes to
-        /// transition on when it is activated.
+        /// Показывает, как долго экран 
+        /// разварачивается при активации
         /// </summary>
         public TimeSpan TransitionOnTime
         {
@@ -70,8 +70,8 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Indicates how long the screen takes to
-        /// transition off when it is deactivated.
+        /// Показывает, как долго экран 
+        /// сварачивается при дезактивации
         /// </summary>
         public TimeSpan TransitionOffTime
         {
@@ -83,9 +83,9 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Gets the current position of the screen transition, ranging
-        /// from zero (fully active, no transition) to one (transitioned
-        /// fully off to nothing).
+        /// Получает текущую позицию перемещения, растяжения
+        /// от нуля (полностью активен, нет перемещения) до 1 (перемещено
+        /// целиком из ничего).
         /// </summary>
         public float TransitionPosition
         {
@@ -108,7 +108,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Gets the current screen transition state.
+        /// Получает текущее состояние перемещения
         /// </summary>
         public ScreenState ScreenState
         {
@@ -120,12 +120,11 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// There are two possible reasons why a screen might be transitioning
-        /// off. It could be temporarily going away to make room for another
-        /// screen that is on top of it, or it could be going away for good.
-        /// This property indicates whether the screen is exiting for real:
-        /// if set, the screen will automatically remove itself as soon as the
-        /// transition finishes.
+        /// Есть 2 возможные причины, почему экран должен быть свёрнут
+        /// Он должен уйти, чтобы дать место новому экрану, который
+        /// находится поверх него, или он может уходить за good.
+        /// Это свойство показывает закрывается ли экран из-за рельной причины.
+        /// Если установлено, то экран удалит себя, как только перемещение будет завершено.
         /// </summary>
         public bool IsExiting
         {
@@ -137,7 +136,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Checks whether this screen is active and can respond to user input.
+        /// Проверяет: активен ли экран и может ли он отвечать на ввод пользователя
         /// </summary>
         public bool IsActive
         {
@@ -153,7 +152,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Gets the manager that this screen belongs to.
+        /// Получает manager которому принадлежит экран
         /// </summary>
         public ScreenManager ScreenManager
         {
@@ -165,12 +164,12 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Gets the index of the player who is currently controlling this screen,
-        /// or null if it is accepting input from any player. This is used to lock
-        /// the game to a specific player profile. The main menu responds to input
-        /// from any connected gamepad, but whichever player makes a selection from
-        /// this menu is given control over all subsequent screens, so other gamepads
-        /// are inactive until the controlling player returns to the main menu.
+        /// Получает индекс игрока, управляещего экраном или null, если принимает
+        /// ввод от любого игрока.Это используется, чтобы заблокировать от 
+        /// определённого игрока. Главное меню отвечает на ввод с любого
+        /// подключённого геймпала, но какой бы игрок не выбрал форму
+        /// это меню получает контроль над всеми экранами,так что другие геймпады
+        /// остаются неактивными до тех пор, пока игрок не передаст контроль обратно.
         /// </summary>
         public PlayerIndex? ControllingPlayer
         {
@@ -182,7 +181,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Gets the gestures the screen is interested in. Screens should be as specific
+        /// Получает поведение нужного экрана. Screens should be as specific
         /// as possible with gestures to increase the accuracy of the gesture engine.
         /// For example, most menus only need Tap or perhaps Tap and VerticalDrag to operate.
         /// These gestures are handled by the ScreenManager when screens change and

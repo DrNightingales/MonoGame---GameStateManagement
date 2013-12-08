@@ -19,9 +19,9 @@ using Microsoft.Xna.Framework.Input;
 namespace GameStateManagement
 {
     /// <summary>
-    /// This screen implements the actual game logic. It is just a
-    /// placeholder to get the idea across: you'll probably want to
-    /// put some more interesting gameplay in here!
+    /// Этот экран осуществляет реальную логику игры.
+    /// Это лишь только заполнитель, чтобы достичь основной идеи.
+    /// Вы наверняка захотите добавить интересных фич сюда. 
     /// </summary>
     class GameplayScreen : GameScreen
     {
@@ -43,7 +43,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Constructor.
+        /// Конструктор.
         /// </summary>
         public GameplayScreen()
         {
@@ -53,7 +53,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Load graphics content for the game.
+        /// Загружает графический контент игры
         /// </summary>
         public override void LoadContent()
         {
@@ -75,7 +75,7 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Unload graphics content used by the game.
+        /// Перезагружает контент игры
         /// </summary>
         public override void UnloadContent()
         {
@@ -89,16 +89,15 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Updates the state of the game. This method checks the GameScreen.IsActive
-        /// property, so the game will stop updating when the pause menu is active,
-        /// or if you tab away to a different application.
+        /// Обновляет состояние игры. Этот метод проверяет свойства GameScreen.IsActive
+        /// поэтому игра остановит обновление, когда пауза в меню будет активна
+        /// или когда вы не фокусируетесь на окне игры, а например свернули окно.
         /// </summary>
         public override void Update(GameTime gameTime, bool otherScreenHasFocus,
                                                        bool coveredByOtherScreen)
         {
             base.Update(gameTime, otherScreenHasFocus, false);
-
-            // Gradually fade in or out depending on whether we are covered by the pause screen.
+            /// Постепенное появление зависит от того, на что мы навели на экране Паузы
             if (coveredByOtherScreen)
                 pauseAlpha = Math.Min(pauseAlpha + 1f / 32, 1);
             else
@@ -106,44 +105,46 @@ namespace GameStateManagement
 
             if (IsActive)
             {
-                // Apply some random jitter to make the enemy move around.
+                ///Добавляет !!!рандомного!!! :) дрожания, чтобы противник двигался
                 const float randomization = 10;
 
                 enemyPosition.X += (float)(random.NextDouble() - 0.5) * randomization;
                 enemyPosition.Y += (float)(random.NextDouble() - 0.5) * randomization;
 
-                // Apply a stabilizing force to stop the enemy moving off the screen.
+                //Добавляем стабилизатор для того, чтобы противник не уходил за пределы экрана
                 Vector2 targetPosition = new Vector2(
                     ScreenManager.GraphicsDevice.Viewport.Width / 2 - gameFont.MeasureString("Insert Gameplay Here").X / 2, 
                     200);
 
                 enemyPosition = Vector2.Lerp(enemyPosition, targetPosition, 0.05f);
 
-                // TODO: this game isn't very fun! You could probably improve
-                // it by inserting something more interesting in this space :-)
+                // Эта игра не особо веселая. Вы можете улучшить ее
+                // добавив еще чего-нибудь
             }
         }
 
 
         /// <summary>
-        /// Lets the game respond to player input. Unlike the Update method,
-        /// this will only be called when the gameplay screen is active.
+        /// Добавим реакцию игры на действия пользователя. В отличии от метода Апдейт,
+        /// этот метод будет вызван, когда экран Геймплей будет активным.
         /// </summary>
         public override void HandleInput(InputState input)
         {
             if (input == null)
                 throw new ArgumentNullException("input");
 
-            // Look up inputs for the active player profile.
+            
+            ///Проверка действий для действий пользователя
             int playerIndex = (int)ControllingPlayer.Value;
 
             KeyboardState keyboardState = input.CurrentKeyboardStates[playerIndex];
             GamePadState gamePadState = input.CurrentGamePadStates[playerIndex];
 
-            // The game pauses either if the user presses the pause button, or if
-            // they unplug the active gamepad. This requires us to keep track of
-            // whether a gamepad was ever plugged in, because we don't want to pause
-            // on PC if they are playing with a keyboard and have no gamepad at all!
+            //Игра будет в режиме паузы, если пользователь нажал на паузу, или если
+            /// он отключил активный геймпад. Это требуется для того, чтобы мы следили
+            /// когда геймпад включен, потому что мы не хотим ставить на паузу игру
+            /// на ПК, если они играют на клаве и у них нету геймпада!!!!!!!!!!
+
             bool gamePadDisconnected = !gamePadState.IsConnected &&
                                        input.GamePadWasConnected[playerIndex];
 
@@ -153,7 +154,7 @@ namespace GameStateManagement
             }
             else
             {
-                // Otherwise move the player position.
+                // Иначе передвигаем позицию игрока
                 Vector2 movement = Vector2.Zero;
 
                 if (keyboardState.IsKeyDown(Keys.Left))
@@ -182,15 +183,15 @@ namespace GameStateManagement
 
 
         /// <summary>
-        /// Draws the gameplay screen.
+        /// Отрисовка экрана
         /// </summary>
         public override void Draw(GameTime gameTime)
         {
-            // This game has a blue background. Why? Because!
+            // Эта игра имеет синий фон. Почему? Потому что! (Примечание редакции)
             ScreenManager.GraphicsDevice.Clear(ClearOptions.Target,
                                                Color.CornflowerBlue, 0, 0);
 
-            // Our player and enemy are both actually just text strings.
+            // Наш игрок и враг вместе всего лишь текстовые переменные
             SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
 
             spriteBatch.Begin();
@@ -202,7 +203,7 @@ namespace GameStateManagement
 
             spriteBatch.End();
 
-            // If the game is transitioning on or off, fade it out to black.
+            /// Если игра включается или выключается, проявим ее из черного
             if (TransitionPosition > 0 || pauseAlpha > 0)
             {
                 float alpha = MathHelper.Lerp(1f - TransitionAlpha, 1f, pauseAlpha / 2);
